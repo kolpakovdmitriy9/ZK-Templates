@@ -135,9 +135,6 @@ body:not(.is-ready) .fab{opacity:0}
 .hero-meta{position:absolute;z-index:4;right:calc(var(--gut) + 70px);bottom:clamp(22px,4vh,40px);color:#fff;text-align:right;font-size:13px;line-height:1.4;font-weight:600;letter-spacing:.02em;text-shadow:0 1px 18px rgba(0,0,0,.5);opacity:0;transition:opacity 1.2s var(--ease) 1.3s}
 .is-ready .hero-meta{opacity:calc(1 - var(--hp,0)*9)}
 .hero.scrolled .hero-copy,.hero.scrolled .hero-meta{opacity:0!important;transition:opacity .2s}
-.hero-down{position:absolute;z-index:4;right:var(--gut);bottom:clamp(18px,3.6vh,36px);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.9);display:grid;place-items:center;color:#111;transition:transform .5s var(--ease)}
-.hero-down:hover{transform:translateY(4px)}
-.hero-down svg{width:16px;height:16px}
 
 /* ============ common ============ */
 .sect{position:relative;z-index:2}
@@ -474,9 +471,7 @@ body:not(.is-ready) .fab{opacity:0}
   .c-caps span{top:auto!important;bottom:0}
   .fin-b{padding-bottom:110px}
 }
-@media(max-width:900px){.hero-down{display:none}}
-.hero.scrolled .hero-down{opacity:0;pointer-events:none}
-@media(max-width:900px){.warm-quote{bottom:clamp(96px,14vh,130px);font-size:clamp(34px,9.4vw,64px)}}
+@media(max-width:900px){.hero.scrolled @media(max-width:900px){.warm-quote{bottom:clamp(96px,14vh,130px);font-size:clamp(34px,9.4vw,64px)}}
 @media(max-width:900px){.c-dot .pill{bottom:auto;top:calc(var(--u)*4 + 112px)}}
 @media(max-width:900px){
   .plans{padding-bottom:44px}
@@ -550,7 +545,6 @@ body:not(.is-ready) .fab{opacity:0}
     <div class="beat" data-b="0.71,0.91"><div class="eyebrow">Первый этаж</div><h2 class="bsplit" data-bsplit>Первый этаж — для жизни</h2><p>Кофейня, пекарня и двусветное лобби с видом на двор.</p></div>
   </div>
   <div class="beat-nav" id="beat-nav"><b class="pill on">Тепло</b><b class="pill">Фасад</b><b class="pill">Свет</b><b class="pill">Первый этаж</b></div>
-  <a class="hero-down" href="#about" aria-label="Дальше"><svg viewBox="0 0 16 16" fill="none" stroke="#111" stroke-width="1.6"><path d="M8 2v12M3 9l5 5 5-5"/></svg></a>
 </section>
 <div class="hero-hold" id="hero-hold" aria-hidden="true"></div>
 
@@ -1306,7 +1300,6 @@ async function intro() {
   root.classList.remove('is-locked');
 }
 
-$('.hero-down').addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); scrollTo({ top: scrollY + vh() * .9, behavior: 'smooth' }); });
 
 /* ---------- boot ---------- */
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
