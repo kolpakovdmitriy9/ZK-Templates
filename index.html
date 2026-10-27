@@ -104,7 +104,7 @@ body:not(.is-ready) .fab{opacity:0}
 .hero{position:sticky;top:0;z-index:1;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#a07a9c}
 #hv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;max-width:none;transform-origin:50% 0;transform:translate3d(var(--hx,0px),0,0) scale(var(--a0,1));will-change:transform;background:#c98c6c}
 .hero:before{content:'';position:absolute;inset:0 0 auto;height:clamp(150px,24vh,230px);z-index:3;background:linear-gradient(to bottom,rgba(12,5,0,.66),rgba(12,5,0,.34) 55%,transparent);pointer-events:none}
-.hero:after{content:'';position:absolute;inset:auto 0 0;height:56%;z-index:3;background:linear-gradient(to bottom,transparent,rgba(20,10,5,.62));pointer-events:none}
+.hero:after{content:'';position:absolute;inset:0;z-index:3;background:linear-gradient(to bottom,rgba(20,10,5,.14),rgba(20,10,5,.3) 45%,rgba(20,10,5,.82));pointer-events:none}
 .hero-hold{height:340vh}
 /* the logo lives in a fixed layer so it can fly into the header */
 .dyn{position:fixed;inset:0;z-index:49;pointer-events:none;overflow:hidden}
@@ -165,7 +165,7 @@ body:not(.is-ready) .fab{opacity:0}
 .warm-left.on .bsplit .w>span{transform:none}
 .warm-photo{background:#c98c6c;position:absolute;inset:0;clip-path:inset(0 0 0 var(--wl,46%));will-change:clip-path}
 .warm-photo img{width:100%;height:100%;object-fit:cover;object-position:60% 50%;transform:translate3d(var(--wpx,0px),0,0) scale(var(--ws,1.25));will-change:transform}
-.warm-photo:after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(20,10,5,.78),rgba(20,10,5,.1) 55%,transparent);opacity:var(--wo,0)}
+.warm-photo:after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(20,10,5,.88),rgba(20,10,5,.5) 55%,rgba(20,10,5,.32));opacity:var(--wo,0)}
 .warm-left{position:absolute;z-index:2;left:var(--gut);top:calc(var(--hdr) + 7vh);width:calc(46% - var(--gut) * 2);opacity:var(--wlo,1);filter:blur(calc((1 - var(--wlo,1))*10px));will-change:opacity,transform}
 .warm-left .eyebrow{margin-bottom:5vh}
 .warm-left .h2{font-size:clamp(40px,5.6vw,96px)}
@@ -188,7 +188,7 @@ body:not(.is-ready) .fab{opacity:0}
 .card-in{position:absolute;inset:0;transform-origin:50% 0;will-change:transform}
 .card video,.card .poster{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover}
 .card .poster{background-size:cover;background-position:center}
-.card-in:after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(10,5,2,.78),rgba(10,5,2,.04) 58%,rgba(10,5,2,.22));pointer-events:none}
+.card-in:after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(10,5,2,.9),rgba(10,5,2,.62) 50%,rgba(10,5,2,.45));pointer-events:none}
 .card .dim{position:absolute;inset:0;background:#000;opacity:var(--dim,0);z-index:3;pointer-events:none}
 .card-t{position:absolute;z-index:2;left:var(--gut);right:var(--gut);bottom:clamp(28px,6vh,70px);display:grid;grid-template-columns:1.4fr 1fr;gap:var(--gut);align-items:end}
 .card-t .eyebrow{grid-column:1/-1;margin-bottom:clamp(14px,3vh,36px);color:#fff}
@@ -218,8 +218,8 @@ body:not(.is-ready) .fab{opacity:0}
 .city-pin{position:relative;height:640vh}
 .city-st{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;--u:14.4px}
 .c-world{position:absolute;inset:0;will-change:transform}
-.c-arc{position:absolute;left:calc((14 - var(--r))*var(--u));top:calc(50% - var(--r)*var(--u));width:calc(var(--r)*2*var(--u));height:calc(var(--r)*2*var(--u));border-radius:50%;border:1.5px solid rgba(27,19,16,.3);background:rgba(196,85,45,.05);opacity:var(--o,0);transform:scale(calc(.88 + var(--o,0)*.12));will-change:transform,opacity}
-.c-dot{position:absolute;left:calc(var(--x)*var(--u));top:50%;width:0;height:0;opacity:var(--o,0)}
+.c-arc{box-sizing:border-box;position:absolute;left:calc((14 - var(--r))*var(--u));top:calc(50% - var(--r)*var(--u));width:calc(var(--r)*2*var(--u));height:calc(var(--r)*2*var(--u));border-radius:50%;border:1.5px solid rgba(27,19,16,.3);background:rgba(196,85,45,.05);opacity:var(--o,0);transform:scale(calc(.88 + var(--o,0)*.12));will-change:transform,opacity}
+.c-dot{position:absolute;left:calc((14 + var(--r)*(.88 + var(--o,0)*.12))*var(--u));top:50%;width:0;height:0;opacity:var(--o,0)}
 .c-dot:before{content:'';position:absolute;left:-6px;top:-6px;width:12px;height:12px;border-radius:50%;background:var(--terra);box-shadow:0 0 0 6px rgba(196,85,45,.18)}
 .c-dot .pill{position:absolute;left:0;bottom:22px;transform:translateX(-50%)}
 .pill{display:inline-flex;align-items:center;height:36px;padding:0 18px;border-radius:99px;background:var(--ink);color:var(--cream);font-size:clamp(12px,1vw,15px);font-weight:600;white-space:nowrap}
@@ -231,6 +231,7 @@ body:not(.is-ready) .fab{opacity:0}
 .c-disc{background:rgba(196,85,45,.07)}
 .c-ringline{border:1.5px solid rgba(196,85,45,.35)}
 .c-photos{position:absolute;inset:0;will-change:clip-path;overflow:hidden}
+.c-photos:after{content:'';position:absolute;inset:0;z-index:5;pointer-events:none;background:linear-gradient(to top,rgba(10,5,2,.72),rgba(10,5,2,.38) 55%,rgba(10,5,2,.3))}
 .c-ph{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;max-width:none}
 .c-ph.pop{clip-path:inset(0 0 100% 0);transition:clip-path 1.2s var(--ease)}
 .c-ph.pop.on{clip-path:inset(0)}
@@ -266,6 +267,7 @@ body:not(.is-ready) .fab{opacity:0}
 .lc-d{margin:10px 0 0;max-width:360px;font-size:clamp(14px,1.1vw,17px);line-height:1.4;font-weight:500;color:rgba(27,19,16,.7);opacity:var(--to,1);transform:translateY(calc((1 - var(--to,1))*18px))}
 .hx{position:relative;flex:none;width:112vw;height:100%;background:#C4785A;overflow:hidden}
 .hx-photo{position:absolute;left:76vw;top:0;bottom:0;width:36vw;overflow:hidden}
+.hx-photo:after{content:'';position:absolute;inset:0;background:rgba(10,5,2,.28);pointer-events:none}
 .hx-photo img{position:absolute;left:-12%;top:0;width:124%;height:100%;object-fit:cover;max-width:none;will-change:transform}
 .h-big{position:absolute;z-index:6;left:3vw;top:calc(var(--hdr) + 7vh);font-weight:700;color:#fff;font-size:min(15.5vw,31vh);line-height:.86;letter-spacing:-.07em;white-space:nowrap;will-change:transform}
 .h-txt{position:absolute;z-index:5;left:3vw;bottom:9vh;width:min(30vw,420px);font-size:clamp(14px,1.15vw,18px);line-height:1.45;font-weight:500;color:#fff;will-change:transform}
@@ -469,22 +471,21 @@ body:not(.is-ready) .fab{opacity:0}
   .c-caps{bottom:112px!important}
   .c-caps span{top:auto!important;bottom:0}
   .fin-b{padding-bottom:110px}
-  .fin-foot{padding-left:var(--gut)}
 }
 @media(max-width:900px){.c-dot .pill{bottom:auto;top:calc(var(--u)*4 + 112px)}}
 @media(max-width:900px){
   .plans{padding-bottom:44px}
   .l-intro{justify-content:flex-start;padding-top:calc(var(--hdr) + 5vh)}
   .lc{flex-basis:86vw;padding-top:calc(var(--hdr) + 3vh);padding-bottom:104px;justify-content:flex-start}
-  .lc-img{aspect-ratio:auto;height:min(68svh,calc(86vw*1.5))}
+  .lc-img{aspect-ratio:auto;height:clamp(220px,calc(100svh - var(--hdr) - 3vh - 262px),calc(86vw*1.5))}
   .lc-img img{height:100%}
 }
 @media(max-width:900px){
-  .fin-foot{position:static;transform:none!important;min-height:0;padding:28px var(--gut) 120px;background:transparent;justify-content:flex-start}
+  .fin-foot{position:static;transform:none!important;min-height:0;padding:28px var(--gut) 120px clamp(36px,5.5vw,112px);background:transparent;justify-content:flex-start}
   .ff-in .f-word{font-size:clamp(90px,30vw,200px)}
   .fin-b#contacts{height:auto;min-height:0;justify-content:flex-start;padding-bottom:34px}
   .fin-col{background:var(--cream);min-height:100svh}
-  .l-fin{flex:0 0 100vw!important}
+  .l-fin{flex:0 0 calc(100vw + 2px)!important;margin-right:-2px}
 }
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
 </style>
@@ -629,9 +630,9 @@ body:not(.is-ready) .fab{opacity:0}
         <i class="c-arc" style="--r:166"></i>
         <i class="c-arc" style="--r:102"></i>
         <i class="c-arc" style="--r:44"></i>
-        <span class="c-dot" style="--x:58"><b class="pill">5 минут</b></span>
-        <span class="c-dot" style="--x:116"><b class="pill">10 минут</b></span>
-        <span class="c-dot" style="--x:180"><b class="pill">15 минут</b></span>
+        <span class="c-dot" style="--r:44"><b class="pill">5 минут</b></span>
+        <span class="c-dot" style="--r:102"><b class="pill">10 минут</b></span>
+        <span class="c-dot" style="--r:166"><b class="pill">15 минут</b></span>
         <div class="c-item" style="--x:66"><div class="num"><em>600</em><b class="pill t">м</b></div><span class="lbl">метро «Парковая»</span><b class="pill">7 мин пешком</b></div>
         <div class="c-item" style="--x:92"><div class="num"><em>1,2</em><b class="pill t">км</b></div><span class="lbl">парк «Лесной»</span><b class="pill">14 мин пешком</b></div>
         <div class="c-item" style="--x:128"><div class="num"><em>5</em><b class="pill t">км</b></div><span class="lbl">выезд на ТТК</span><b class="pill">5 мин на авто</b></div>
@@ -1244,6 +1245,7 @@ function frame() {
   fin1.style.opacity = (1 - clamp(fp * 1.6)).toFixed(3); fin1.style.transform = `translate3d(0,${(-fp * 60).toFixed(1)}px,0)`;
   offItems.forEach((it, k) => { const q = EASE(clamp((fp - .22 - k * .045) / .36)); it.style.opacity = q.toFixed(3); it.style.transform = `translate3d(0,${((1 - q) * 46).toFixed(1)}px,0)`; });
   lx += (-lp * extra - lx) * .12;
+  if (Math.abs(-lp * extra - lx) < .8) lx = -lp * extra;      // land exactly, no sub-pixel sliver of the previous panel
   ltrack.style.transform = `translate3d(${lx.toFixed(1)}px,0,0)`;
   leis.style.setProperty('--lp', lp.toFixed(4));
   // each column: the photo opens from the left as it enters, drifts against the scroll, caption follows
