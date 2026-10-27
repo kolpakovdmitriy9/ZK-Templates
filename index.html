@@ -470,7 +470,14 @@ body:not(.is-ready) .fab{opacity:0}
   .fin-b{padding-bottom:110px}
   .fin-foot{padding-left:var(--gut)}
 }
-@media(max-width:900px){.c-dot .pill{bottom:auto;top:24px}}
+@media(max-width:900px){.c-dot .pill{bottom:auto;top:calc(var(--u)*4 + 112px)}}
+@media(max-width:900px){
+  .plans{padding-bottom:44px}
+  .l-intro{justify-content:flex-start;padding-top:calc(var(--hdr) + 5vh)}
+  .lc{flex-basis:86vw;padding-top:calc(var(--hdr) + 3vh);padding-bottom:104px;justify-content:flex-start}
+  .lc-img{aspect-ratio:auto;height:min(68svh,calc(86vw*1.5))}
+  .lc-img img{height:100%}
+}
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
 </style>
 <link rel="preload" as="image" href="media/g-couple.jpg">
