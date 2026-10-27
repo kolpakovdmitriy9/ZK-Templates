@@ -454,7 +454,7 @@ body:not(.is-ready) .fab{opacity:0}
   .c-dot .pill{bottom:18px}
 }
 
-.fin-foot{position:absolute;inset:0;z-index:8;background:var(--cream);transform:translate3d(0,100%,0);will-change:transform;display:flex;flex-direction:column;justify-content:flex-end;padding:calc(var(--hdr) + 5vh) var(--gut) clamp(104px,15vh,150px) clamp(36px,5.5vw,112px);box-shadow:0 -30px 80px rgba(27,19,16,.12)}
+.fin-foot{position:absolute;inset:0;z-index:8;background:var(--cream);transform:translate3d(0,100%,0);will-change:transform;display:flex;flex-direction:column;justify-content:flex-end;padding:calc(var(--hdr) + 5vh) var(--gut) clamp(104px,15vh,150px) clamp(36px,5.5vw,112px)}
 .ff-in{display:flex;flex-direction:column;gap:2.4vh;width:100%}
 .ff-in .lb-row{display:flex;gap:clamp(24px,6vw,120px);font-size:15px;line-height:1.9;flex-wrap:wrap;padding-bottom:2.4vh;border-bottom:1px solid rgba(27,19,16,.14)}
 .ff-in .lb-row a,.ff-in .lb-row span{display:block}.ff-in .lb-doc{opacity:.65}
@@ -477,6 +477,13 @@ body:not(.is-ready) .fab{opacity:0}
   .lc{flex-basis:86vw;padding-top:calc(var(--hdr) + 3vh);padding-bottom:104px;justify-content:flex-start}
   .lc-img{aspect-ratio:auto;height:min(68svh,calc(86vw*1.5))}
   .lc-img img{height:100%}
+}
+@media(max-width:900px){
+  .fin-foot{position:static;transform:none!important;min-height:0;padding:28px var(--gut) 120px;background:transparent;justify-content:flex-start}
+  .ff-in .f-word{font-size:clamp(90px,30vw,200px)}
+  .fin-b#contacts{height:auto;min-height:0;justify-content:flex-start;padding-bottom:34px}
+  .fin-col{background:var(--cream);min-height:100svh}
+  .l-fin{flex:0 0 100vw!important}
 }
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
 </style>
@@ -1040,14 +1047,16 @@ addEventListener('resize', layoutCity); layoutCity();
 /* ---------- leisure: one sideways gallery ---------- */
 const leFrame = $('#le-frame'), leEnd = $('#l-map'), finCol = $('#fin-col');
 let vy = 0, vEx = 0, FT = 0;
-const finFoot = $('#fin-foot');
+const finFoot = $('#fin-foot'), finMq = matchMedia('(max-width:900px)');
+const placeFoot = () => { (finMq.matches ? finCol : $('.leisure-st')).appendChild(finFoot); };
+placeFoot(); finMq.addEventListener('change', () => { placeFoot(); sizeLeisure(); });
 const fin1 = $('.fin-b'), offItems = [...$$('#contacts .off-top > *')];
 const ltrack = $('#l-track'), leis = $('#leisure'), lcards = $$('.lc'), lFin = $('#l-fin');
 const hxEl = $('.hx'), l2hk = $$('#leisure [data-hk]'), l2ph = $$('#leisure [data-ph]');
 function sizeLeisure() {
   const extra = Math.max(0, ltrack.scrollWidth - vw());
   vEx = Math.max(0, finCol.offsetHeight - vh());
-  FT = Math.round(vh() * .85);
+  FT = finMq.matches ? 0 : Math.round(vh() * .85);
   leis.style.height = `calc(100svh + ${extra + vEx + FT}px)`;
 }
 addEventListener('resize', sizeLeisure);
@@ -1228,7 +1237,7 @@ function frame() {
   vy += (-clamp(-lr.top - extra, 0, vEx) - vy) * .09;                  // after the sideways part the left column scrolls up, the map stays
   const fp = vEx > 0 ? clamp(-vy / vEx) : 0;
   const ftp = FT > 0 ? clamp((-lr.top - extra - vEx) / FT) : 0, fte = ftp * ftp * (3 - 2 * ftp);
-  finFoot.style.transform = `translate3d(0,${((1 - fte) * 100).toFixed(2)}%,0)`;
+  if (!finMq.matches) finFoot.style.transform = `translate3d(0,${((1 - fte) * 100).toFixed(2)}%,0)`; else finFoot.style.transform = '';
   finCol.style.transform = `translate3d(0,${vy.toFixed(1)}px,0)`;
   fin1.style.opacity = (1 - clamp(fp * 1.6)).toFixed(3); fin1.style.transform = `translate3d(0,${(-fp * 60).toFixed(1)}px,0)`;
   offItems.forEach((it, k) => { const q = EASE(clamp((fp - .22 - k * .045) / .36)); it.style.opacity = q.toFixed(3); it.style.transform = `translate3d(0,${((1 - q) * 46).toFixed(1)}px,0)`; });
