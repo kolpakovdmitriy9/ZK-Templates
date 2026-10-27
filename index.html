@@ -453,6 +453,23 @@ body:not(.is-ready) .fab{opacity:0}
   .pill{height:30px;padding:0 14px}
   .c-dot .pill{bottom:18px}
 }
+
+.fin-foot{position:absolute;inset:0;z-index:8;background:var(--cream);transform:translate3d(0,100%,0);will-change:transform;display:flex;flex-direction:column;justify-content:flex-end;padding:calc(var(--hdr) + 5vh) var(--gut) clamp(104px,15vh,150px) clamp(36px,5.5vw,112px);box-shadow:0 -30px 80px rgba(27,19,16,.12)}
+.ff-in{display:flex;flex-direction:column;gap:2.4vh;width:100%}
+.ff-in .lb-row{display:flex;gap:clamp(24px,6vw,120px);font-size:15px;line-height:1.9;flex-wrap:wrap;padding-bottom:2.4vh;border-bottom:1px solid rgba(27,19,16,.14)}
+.ff-in .lb-row a,.ff-in .lb-row span{display:block}.ff-in .lb-doc{opacity:.65}
+.ff-in .f-word{margin:0;font-size:clamp(90px,21vw,400px);line-height:.82;color:var(--ink);letter-spacing:-.075em}
+.ff-in .lb-fine{margin:0;font-size:12px;opacity:.5;line-height:1.5;max-width:none;padding-right:0}
+@media(max-width:900px){
+  .fab{height:48px;padding:0 18px;font-size:14px}
+  .beat{bottom:clamp(150px,22vh,200px)}.beat-nav{bottom:84px}
+  .card-t{bottom:112px}
+  .c-caps{bottom:112px!important}
+  .c-caps span{top:auto!important;bottom:0}
+  .fin-b{padding-bottom:110px}
+  .fin-foot{padding-left:var(--gut)}
+}
+@media(max-width:900px){.c-dot .pill{bottom:auto;top:24px}}
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
 </style>
 <link rel="preload" as="image" href="media/g-couple.jpg">
@@ -705,14 +722,7 @@ body:not(.is-ready) .fab{opacity:0}
             </div>
             <a class="le-open-m" href="https://yandex.ru/maps/?ll=37.796%2C55.794&z=17&pt=37.796%2C55.794%2Cpm2rdm" target="_blank" rel="noopener">Открыть в Яндекс Картах ↗</a>
             </div>
-            <div class="off-foot">
-            <div class="lb-row">
-              <div class="lb-nav"><a href="#design">О доме</a><a href="#city">Расположение</a><a href="#plans">Квартиры</a><a href="#leisure">Двор</a></div>
-              <div class="lb-doc"><span>Проектная декларация</span><span>Разрешение на строительство</span><span>Не является публичной офертой</span></div>
-            </div>
-            <div class="f-word" id="f-word" aria-label="атлас">атлас</div>
-            <p class="lb-fine">© ЖК «Атлас». Демонстрационный сайт: название, адрес, цены и характеристики вымышлены и не являются публичной офертой.</p>
-          </div>
+            
           </div>
         </div>
       </div>
@@ -723,6 +733,13 @@ body:not(.is-ready) .fab{opacity:0}
         </a>
       </div>
     </div>
+  <div class="fin-foot" id="fin-foot"><div class="ff-in">
+            <div class="lb-row">
+              <div class="lb-nav"><a href="#design">О доме</a><a href="#city">Расположение</a><a href="#plans">Квартиры</a><a href="#leisure">Двор</a></div>
+              <div class="lb-doc"><span>Проектная декларация</span><span>Разрешение на строительство</span><span>Не является публичной офертой</span></div>
+            </div>
+            <div class="f-word" id="f-word" aria-label="атлас">атлас</div>
+            <p class="lb-fine">© ЖК «Атлас». Демонстрационный сайт: название, адрес, цены и характеристики вымышлены и не являются публичной офертой.</p></div></div>
   </div>
 </section>
 
@@ -1014,14 +1031,16 @@ addEventListener('resize', layoutCity); layoutCity();
 
 /* ---------- leisure: one sideways gallery ---------- */
 const leFrame = $('#le-frame'), leEnd = $('#l-map'), finCol = $('#fin-col');
-let vy = 0, vEx = 0;
-const fin1 = $('.fin-b'), offItems = [...$$('#contacts .off-top > *, #contacts .off-foot > *')];
+let vy = 0, vEx = 0, FT = 0;
+const finFoot = $('#fin-foot');
+const fin1 = $('.fin-b'), offItems = [...$$('#contacts .off-top > *')];
 const ltrack = $('#l-track'), leis = $('#leisure'), lcards = $$('.lc'), lFin = $('#l-fin');
 const hxEl = $('.hx'), l2hk = $$('#leisure [data-hk]'), l2ph = $$('#leisure [data-ph]');
 function sizeLeisure() {
   const extra = Math.max(0, ltrack.scrollWidth - vw());
   vEx = Math.max(0, finCol.offsetHeight - vh());
-  leis.style.height = `calc(100svh + ${extra + vEx}px)`;
+  FT = Math.round(vh() * .85);
+  leis.style.height = `calc(100svh + ${extra + vEx + FT}px)`;
 }
 addEventListener('resize', sizeLeisure);
 
@@ -1200,6 +1219,8 @@ function frame() {
   const lp = lrange > 0 ? clamp(-lr.top / lrange) : 0;
   vy += (-clamp(-lr.top - extra, 0, vEx) - vy) * .09;                  // after the sideways part the left column scrolls up, the map stays
   const fp = vEx > 0 ? clamp(-vy / vEx) : 0;
+  const ftp = FT > 0 ? clamp((-lr.top - extra - vEx) / FT) : 0, fte = ftp * ftp * (3 - 2 * ftp);
+  finFoot.style.transform = `translate3d(0,${((1 - fte) * 100).toFixed(2)}%,0)`;
   finCol.style.transform = `translate3d(0,${vy.toFixed(1)}px,0)`;
   fin1.style.opacity = (1 - clamp(fp * 1.6)).toFixed(3); fin1.style.transform = `translate3d(0,${(-fp * 60).toFixed(1)}px,0)`;
   offItems.forEach((it, k) => { const q = EASE(clamp((fp - .22 - k * .045) / .36)); it.style.opacity = q.toFixed(3); it.style.transform = `translate3d(0,${((1 - q) * 46).toFixed(1)}px,0)`; });
