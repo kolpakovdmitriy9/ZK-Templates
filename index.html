@@ -134,6 +134,7 @@ body:not(.is-ready) .fab{opacity:0}
 .is-ready .hero-copy{opacity:calc(1 - var(--hp,0)*9);transform:none}
 .hero-meta{position:absolute;z-index:4;right:calc(var(--gut) + 70px);bottom:clamp(22px,4vh,40px);color:#fff;text-align:right;font-size:13px;line-height:1.4;font-weight:600;letter-spacing:.02em;text-shadow:0 1px 18px rgba(0,0,0,.5);opacity:0;transition:opacity 1.2s var(--ease) 1.3s}
 .is-ready .hero-meta{opacity:calc(1 - var(--hp,0)*9)}
+.hero.scrolled .hero-copy,.hero.scrolled .hero-meta{opacity:0!important;transition:opacity .2s}
 .hero-down{position:absolute;z-index:4;right:var(--gut);bottom:clamp(18px,3.6vh,36px);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.9);display:grid;place-items:center;color:#111;transition:transform .5s var(--ease)}
 .hero-down:hover{transform:translateY(4px)}
 .hero-down svg{width:16px;height:16px}
@@ -1103,6 +1104,7 @@ function frame() {
   /* hero: the picture scrubs with the scroll while four text steps pass over it */
   const hp = clamp(scrollY / H), sp = clamp(scrollY / Math.max(1, heroHold.offsetHeight + H));   // 1 = the moment the next panel starts to arrive
   updateHeroVideo(sp);
+  heroEl.classList.toggle('scrolled', scrollY > 4);
   setVars(heroEl, { '--hp': hp.toFixed(4), '--a0': (1 + .05 * sp).toFixed(4) });
   let cur = -1;
   beatRange.forEach(([a, b], i) => { const on = sp >= a && sp < b; beatEls[i].classList.toggle('on', on); if (on) cur = i; });
